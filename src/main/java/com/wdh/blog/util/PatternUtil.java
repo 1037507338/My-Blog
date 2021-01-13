@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * 正则工具类
  *
- * @author 13
+ * @author wangdonghao
  * @qq交流群 796794009
  * @email 2449207463@qq.com
  * @link http://13blog.site

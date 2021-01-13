@@ -5,7 +5,7 @@ import org.springframework.util.StringUtils;
 import java.net.URI;
 
 /**
- * @author 13
+ * @author wangdonghao
  */
 public class MyBlogUtils {
 

@@ -3,10 +3,7 @@ package com.wdh.blog.util;
 import java.security.MessageDigest;
 
 /**
- * @author 13
- * @qq交流群 796794009
- * @email 2449207463@qq.com
- * @link http://13blog.site
+ * @author wangdonghao
  */
 public class MD5Util {
 
