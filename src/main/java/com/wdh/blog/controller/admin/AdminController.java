@@ -2,7 +2,6 @@ package com.wdh.blog.controller.admin;
 
 import com.wdh.blog.entity.AdminUser;
 import com.wdh.blog.service.*;
-import com.wdh.blog.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
