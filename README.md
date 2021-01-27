@@ -17,8 +17,6 @@
 
 ### 《SpringBoot + Mybatis + Thymeleaf》
 
-[![lesson-03](https://newbee-mall.oss-cn-beijing.aliyuncs.com/poster/store/lesson-03.png)](https://www.shiyanlou.com/courses/1367)
-
 ## 联系作者
 
 > 大家有任何问题或者建议都可以在 [issues](https://github.com/ZHENFENG13/My-Blog/issues) 中反馈给我，我会慢慢完善这个项目。
@@ -26,44 +24,3 @@
 - 我的邮箱：1037507338@qq.com
 
 
-#### 模板一
-
-- 首页
-
-	![index01](static-files/index01.png)
-
-- 文章浏览
-
-	![detail01](static-files/detail01.png)
-
-- 友情链接
-
-	![link01](static-files/link01.png)
-
-#### 模板二
-
-- 首页
-
-	![index02](static-files/index02.png)
-
-- 文章浏览
-
-	![detail02](static-files/detail02.png)
-
-- 友情链接
-
-	![link02](static-files/link02.png)
-
-#### 模板三
-
-- 首页
-
-  ![index03](static-files/index03.png)
-
-- 文章浏览
-
-  ![detail03](static-files/detail03.png)
-
-- 友情链接
-
-  ![link03](static-files/link03.png)
