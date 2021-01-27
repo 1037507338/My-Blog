@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface BlogMapper {
+public interface BlogMapper extends DeleteMapper {
     int deleteByPrimaryKey(Long blogId);
 
     int insert(Blog record);

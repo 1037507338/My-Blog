@@ -216,4 +216,9 @@
       is_deleted = #{isDeleted,jdbcType=TINYINT}
     where comment_id = #{commentId,jdbcType=BIGINT}
   </update>
+
+    <delete id="deleteMarkedData">
+        delete from tb_blog_comment where is_deleted = 1
+        and comment_create_time <![CDATA[ <= ]]> #{createTime,jdbcType=TIMESTAMP};
+    </delete>
 </mapper>

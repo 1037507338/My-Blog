@@ -315,4 +315,9 @@
         </foreach>
         and is_deleted =0
     </update>
+
+    <delete id="deleteMarkedData">
+        delete from tb_blog where is_deleted = 1
+        and create_time <![CDATA[ <= ]]> #{createTime,jdbcType=TIMESTAMP};
+    </delete>
 </mapper>

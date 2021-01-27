@@ -6,7 +6,7 @@ import com.wdh.blog.util.PageQueryUtil;
 
 import java.util.List;
 
-public interface BlogTagMapper {
+public interface BlogTagMapper extends DeleteMapper {
     int deleteByPrimaryKey(Integer tagId);
 
     int insert(BlogTag record);

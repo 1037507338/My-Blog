@@ -5,7 +5,7 @@ import com.wdh.blog.entity.BlogComment;
 import java.util.List;
 import java.util.Map;
 
-public interface BlogCommentMapper {
+public interface BlogCommentMapper extends DeleteMapper {
     int deleteByPrimaryKey(Long commentId);
 
     int insert(BlogComment record);

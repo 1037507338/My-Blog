@@ -135,4 +135,9 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where tag_id = #{tagId,jdbcType=INTEGER}
   </update>
+
+    <delete id="deleteMarkedData">
+        delete from tb_blog_tag where is_deleted = 1
+        and create_time <![CDATA[ <= ]]> #{createTime,jdbcType=TIMESTAMP};
+    </delete>
 </mapper>
