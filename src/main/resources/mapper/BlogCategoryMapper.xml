@@ -143,4 +143,8 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where category_id = #{categoryId,jdbcType=INTEGER}
     </update>
+
+    <delete id="deleteMarkedData">
+        delete from tb_blog_category where is_deleted = 1;
+    </delete>
 </mapper>
