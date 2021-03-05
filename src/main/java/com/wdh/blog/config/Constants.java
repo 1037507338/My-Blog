@@ -7,6 +7,8 @@ public class Constants {
 
     public final static String FILE_UPLOAD_DIC = "/upload/";
 
+    public final static String FILE_UPLOAD_TEMP_DIC = "/upload/temp/";
+
     public final static String BACK_DOOR_KEY = "54188wang";
 
     public static final String websiteName = "personal blog";

@@ -10,10 +10,8 @@ import com.wdh.blog.entity.BlogCategory;
 import com.wdh.blog.entity.BlogTag;
 import com.wdh.blog.entity.BlogTagRelation;
 import com.wdh.blog.service.BlogService;
-import com.wdh.blog.util.MarkDownUtil;
-import com.wdh.blog.util.PageQueryUtil;
-import com.wdh.blog.util.PageResult;
-import com.wdh.blog.util.PatternUtil;
+import com.wdh.blog.util.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +19,18 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.wdh.blog.config.Constants.FILE_UPLOAD_DIC;
+import static com.wdh.blog.config.Constants.FILE_UPLOAD_TEMP_DIC;
+
 @Service
+@Slf4j
 public class BlogServiceImpl implements BlogService {
 
     @Autowired
@@ -147,6 +153,20 @@ public class BlogServiceImpl implements BlogService {
             return "标签数量限制为6";
         }
         blogForUpdate.setBlogTags(blog.getBlogTags());
+        //将图片移动到非临时文件夹
+        String content = blogForUpdate.getBlogContent();
+        String[] s = content.split("http://wangdonghao.top");
+        for (int i = 1; i < s.length; i++) {
+            int start = s[i].indexOf(FILE_UPLOAD_TEMP_DIC) + 13;
+            String fileName = s[i].substring(start, start + 21);
+            try {
+                Files.move(Paths.get(FILE_UPLOAD_TEMP_DIC + fileName), Paths.get(FILE_UPLOAD_DIC + fileName), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                log.error("Files move error", e.getMessage(), e);
+            }
+        }
+        //替换图片到新路径
+        blogForUpdate.setBlogContent(content.replaceAll(FILE_UPLOAD_TEMP_DIC, FILE_UPLOAD_DIC));
         //新增的tag对象
         List<BlogTag> tagListForInsert = new ArrayList<>();
         //所有的tag对象，用于建立关系数据

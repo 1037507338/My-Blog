@@ -4,10 +4,7 @@ import com.wdh.blog.config.Constants;
 import com.wdh.blog.entity.Blog;
 import com.wdh.blog.service.BlogService;
 import com.wdh.blog.service.CategoryService;
-import com.wdh.blog.util.MyBlogUtils;
-import com.wdh.blog.util.PageQueryUtil;
-import com.wdh.blog.util.Result;
-import com.wdh.blog.util.ResultGenerator;
+import com.wdh.blog.util.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Random;
+
+import static com.wdh.blog.config.Constants.FILE_UPLOAD_TEMP_DIC;
 
 /**
  * @author wangdonghao
@@ -192,9 +191,9 @@ public class BlogController {
         tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
         String newFileName = tempName.toString();
         //创建文件
-        File destFile = new File(Constants.FILE_UPLOAD_DIC + newFileName);
-        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + "/upload/" + newFileName;
-        File fileDirectory = new File(Constants.FILE_UPLOAD_DIC);
+        File destFile = new File(Constants.FILE_UPLOAD_TEMP_DIC + newFileName);
+        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + FILE_UPLOAD_TEMP_DIC + newFileName;
+        File fileDirectory = new File(Constants.FILE_UPLOAD_TEMP_DIC);
         try {
             if (!fileDirectory.exists()) {
                 if (!fileDirectory.mkdir()) {
