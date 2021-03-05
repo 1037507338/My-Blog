@@ -3,34 +3,21 @@ package com.wdh.blog.service.impl;
 import com.wdh.blog.dao.BlogConfigMapper;
 import com.wdh.blog.entity.BlogConfig;
 import com.wdh.blog.service.ConfigService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.wdh.blog.config.Constants.*;
+
 @Service
 public class ConfigServiceImpl implements ConfigService {
-    @Autowired
+    @Resource
     private BlogConfigMapper configMapper;
-
-    public static final String websiteName = "personal blog";
-    public static final String websiteDescription = "personal blog是SpringBoot2+Thymeleaf+Mybatis建造的个人博客网站.SpringBoot实战博客源码.个人博客搭建";
-    public static final String websiteLogo = "/admin/dist/img/logo2.png";
-    public static final String websiteIcon = "/admin/dist/img/favicon.png";
-
-    public static final String yourAvatar = "/admin/dist/img/wdh.png";
-    public static final String yourEmail = "2449207463@qq.com";
-    public static final String yourName = "十三";
-
-    public static final String footerAbout = "your personal blog. have fun.";
-    public static final String footerICP = "浙ICP备 xxxxxx-x号";
-    public static final String footerCopyRight = "@2018 十三";
-    public static final String footerPoweredBy = "personal blog";
-    public static final String footerPoweredByURL = "##";
 
     @Override
     public int updateConfig(String configName, String configValue) {
