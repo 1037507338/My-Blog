@@ -183,23 +183,10 @@ public class BlogController {
                                      @RequestParam(name = "editormd-image-file", required = true)
                                              MultipartFile file) throws IOException, URISyntaxException {
         String fileName = file.getOriginalFilename();
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
         //生成文件名称通用方法
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        Random r = new Random();
-        StringBuilder tempName = new StringBuilder();
-        tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
-        String newFileName = tempName.toString();
-        //创建文件
-        File destFile = new File(FILE_TEMP_DIC + newFileName);
-        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + LINUX_FILE_TEMP_DIC + newFileName;
-        File fileDirectory = new File(FILE_TEMP_DIC);
+        File destFile = FileUtil.createFile(FILE_TEMP_DIC, fileName);
+        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + LINUX_FILE_TEMP_DIC + destFile.getName();
         try {
-            if (!fileDirectory.exists()) {
-                if (!fileDirectory.mkdir()) {
-                    throw new IOException("文件夹创建失败,路径为：" + fileDirectory);
-                }
-            }
             file.transferTo(destFile);
             request.setCharacterEncoding("utf-8");
             response.setHeader("Content-Type", "text/html");

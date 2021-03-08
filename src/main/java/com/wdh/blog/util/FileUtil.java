@@ -53,17 +53,16 @@ public class FileUtil {
     }
 
     public static File createFile(String filePath, String fileName) throws IOException {
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-        Random r = new Random();
-        //创建文件
-        File destFile = new File(filePath + System.currentTimeMillis() + r.nextInt(100) + suffixName);
         File fileDirectory = new File(filePath);
         if (!fileDirectory.exists()) {
             if (!fileDirectory.mkdir()) {
                 throw new IOException("文件夹创建失败,路径为：" + fileDirectory);
             }
         }
-        return destFile;
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        Random r = new Random();
+        //创建文件
+        return new File(filePath + System.currentTimeMillis() + r.nextInt(100) + suffixName);
     }
 
 }
