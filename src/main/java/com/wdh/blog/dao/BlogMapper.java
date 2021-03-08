@@ -14,27 +14,27 @@ public interface BlogMapper extends DeleteMapper {
 
     int insertSelective(Blog record);
 
-    Blog selectByPrimaryKey(Long blogId);
-
     int updateByPrimaryKeySelective(Blog record);
 
     int updateByPrimaryKeyWithBLOBs(Blog record);
 
     int updateByPrimaryKey(Blog record);
 
+    Blog selectByPrimaryKey(Long blogId);
+
+    Blog selectBySubUrl(String subUrl);
+
     List<Blog> findBlogList(PageQueryUtil pageUtil);
 
     List<Blog> findBlogListByType(@Param("type") int type, @Param("limit") int limit);
+
+    List<Blog> getBlogsPageByTagId(PageQueryUtil pageUtil);
 
     int getTotalBlogs(PageQueryUtil pageUtil);
 
     int deleteBatch(Integer[] ids);
 
-    List<Blog> getBlogsPageByTagId(PageQueryUtil pageUtil);
-
     int getTotalBlogsByTagId(PageQueryUtil pageUtil);
-
-    Blog selectBySubUrl(String subUrl);
 
     int updateBlogCategorys(@Param("categoryName") String categoryName, @Param("categoryId") Integer categoryId, @Param("ids")Integer[] ids);
 

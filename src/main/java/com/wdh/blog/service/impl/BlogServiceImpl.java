@@ -50,11 +50,13 @@ public class BlogServiceImpl implements BlogService {
         if (blogForCreate == null) {
             return "constructBlogContent fail";
         }
-        Integer tagAndTypeResult = constructBlogTagAndType(blogForCreate);
-        if (tagAndTypeResult == 0) {
-            return "constructBlogTagAndType fail";
-        }
+        BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
+        blogForCreate.setBlogCategoryName(blogCategory.getCategoryName());
         if (blogMapper.insertSelective(blogForCreate) > 0) {
+            Integer tagAndTypeResult = constructBlogTagAndType(blogForCreate, blogCategory);
+            if (tagAndTypeResult == 0) {
+                return "constructBlogTagAndType fail";
+            }
             return "success";
         }
         return "修改失败";
@@ -74,7 +76,8 @@ public class BlogServiceImpl implements BlogService {
         if (blogForUpdate == null) {
             return "constructBlogContent fail";
         }
-        Integer tagAndTypeResult = constructBlogTagAndType(blog);
+        BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
+        Integer tagAndTypeResult = constructBlogTagAndType(blog, blogCategory);
         if (tagAndTypeResult == 0) {
             return "constructBlogTagAndType fail";
         }
@@ -119,13 +122,12 @@ public class BlogServiceImpl implements BlogService {
      * @param blog
      * @return
      */
-    private int constructBlogTagAndType (Blog blog) {
+    private int constructBlogTagAndType (Blog blog, BlogCategory blogCategory) {
         //处理标签数据
         String[] tags = blog.getBlogTags().split(",");
         if (tags.length > 6) {
             return 0;
         }
-        BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
         if (blogCategory == null) {
             blog.setBlogCategoryId(0);
             blog.setBlogCategoryName("默认分类");
