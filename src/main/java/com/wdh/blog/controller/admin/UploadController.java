@@ -1,6 +1,7 @@
 package com.wdh.blog.controller.admin;
 
 import com.wdh.blog.config.Constants;
+import com.wdh.blog.util.FileUtil;
 import com.wdh.blog.util.MyBlogUtils;
 import com.wdh.blog.util.Result;
 import com.wdh.blog.util.ResultGenerator;
@@ -14,11 +15,15 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+
+import static com.wdh.blog.config.Constants.FILE_TEMP_DIC;
+import static com.wdh.blog.config.Constants.LINUX_FILE_TEMP_DIC;
 
 /**
  * @author wangdonghao
@@ -29,27 +34,16 @@ public class UploadController {
 
     @PostMapping({"/upload/file"})
     @ResponseBody
-    public Result upload(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) throws URISyntaxException {
+    public Result upload(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws URISyntaxException, IOException {
         String fileName = file.getOriginalFilename();
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
         //生成文件名称通用方法
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        Random r = new Random();
-        StringBuilder tempName = new StringBuilder();
-        tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
-        String newFileName = tempName.toString();
-        File fileDirectory = new File(Constants.LINUX_FILE_UPLOAD_DIC);
-        //创建文件
-        File destFile = new File(Constants.LINUX_FILE_UPLOAD_DIC + newFileName);
+        File destFile = FileUtil.createFile(FILE_TEMP_DIC, fileName);
+        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + LINUX_FILE_TEMP_DIC + destFile.getName();
         try {
-            if (!fileDirectory.exists()) {
-                if (!fileDirectory.mkdir()) {
-                    throw new IOException("文件夹创建失败,路径为：" + fileDirectory);
-                }
-            }
             file.transferTo(destFile);
+            request.setCharacterEncoding("utf-8");
             Result resultSuccess = ResultGenerator.genSuccessResult();
-            resultSuccess.setData(MyBlogUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
+            resultSuccess.setData(fileUrl);
             return resultSuccess;
         } catch (IOException e) {
             e.printStackTrace();

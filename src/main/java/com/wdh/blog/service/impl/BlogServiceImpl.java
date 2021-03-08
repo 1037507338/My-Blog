@@ -98,7 +98,10 @@ public class BlogServiceImpl implements BlogService {
         }
         //将图片移动到非临时文件夹
         String content = blog.getBlogContent();
+        String coverImage = blog.getBlogCoverImage();
         String[] s = content.split(HOST_NAME);
+        String[] imgNames = coverImage.split("/");
+        String imgName = imgNames[imgNames.length - 1];
         for (int i = 1; i < s.length; i++) {
             int start = s[i].indexOf(LINUX_FILE_TEMP_DIC);
             if (start < 0) {
@@ -108,12 +111,19 @@ public class BlogServiceImpl implements BlogService {
             try {
                 Files.move(Paths.get(FILE_TEMP_DIC + fileName), Paths.get(FILE_UPLOAD_DIC + fileName), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
-                log.error("Files move error", e.getMessage(), e);
+                log.error("content files move error", e.getMessage(), e);
                 return null;
             }
         }
+        try {
+            Files.move(Paths.get(FILE_TEMP_DIC + imgName), Paths.get(FILE_UPLOAD_DIC + imgName), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            log.error("imgName files move error", e.getMessage(), e);
+            return null;
+        }
         //替换图片到新路径
         blog.setBlogContent(content.replaceAll(LINUX_FILE_TEMP_DIC, LINUX_FILE_UPLOAD_DIC));
+        blog.setBlogCoverImage(coverImage.replaceAll(LINUX_FILE_TEMP_DIC, LINUX_FILE_UPLOAD_DIC));
         return blog;
     }
 
