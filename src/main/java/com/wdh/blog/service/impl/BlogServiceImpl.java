@@ -113,7 +113,7 @@ public class BlogServiceImpl implements BlogService {
                 return null;
             }
         }
-        if (!coverImage.contains("admin/dist/img/rand")) {
+        if (coverImage.contains(FILE_TEMP_DIC)) {
             String[] imgNames = coverImage.split("/");
             String imgName = imgNames[imgNames.length - 1];
             try {
