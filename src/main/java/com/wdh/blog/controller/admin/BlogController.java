@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
-import static com.wdh.blog.config.Constants.FILE_UPLOAD_TEMP_DIC;
+import static com.wdh.blog.config.Constants.*;
 
 /**
  * @author wangdonghao
@@ -191,9 +191,9 @@ public class BlogController {
         tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
         String newFileName = tempName.toString();
         //创建文件
-        File destFile = new File(Constants.FILE_UPLOAD_TEMP_DIC + newFileName);
-        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + FILE_UPLOAD_TEMP_DIC + newFileName;
-        File fileDirectory = new File(Constants.FILE_UPLOAD_TEMP_DIC);
+        File destFile = new File(FILE_TEMP_DIC + newFileName);
+        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + LINUX_FILE_TEMP_DIC + newFileName;
+        File fileDirectory = new File(FILE_TEMP_DIC);
         try {
             if (!fileDirectory.exists()) {
                 if (!fileDirectory.mkdir()) {

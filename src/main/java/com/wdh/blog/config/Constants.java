@@ -5,9 +5,34 @@ package com.wdh.blog.config;
  */
 public class Constants {
 
-    public final static String FILE_UPLOAD_DIC = "/upload/";
+    public static String FILE_UPLOAD_DIC;
 
-    public final static String FILE_UPLOAD_TEMP_DIC = "/upload/temp/";
+    public static String FILE_TEMP_DIC;
+
+    public static Boolean LINUX_SERVER = true;
+
+    public static String HOST_NAME;
+
+    public static String LINUX_FILE_UPLOAD_DIC = "/web/upload/";
+
+    public static String WIN_FILE_UPLOAD_DIC = "D:/web/upload/";
+
+    public static String LINUX_FILE_TEMP_DIC = "/web/temp/";
+
+    public final static String WIN_FILE_TEMP_DIC = "D:/web/temp/";
+
+    static {
+        if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
+            LINUX_SERVER = false;
+            FILE_UPLOAD_DIC = WIN_FILE_UPLOAD_DIC;
+            FILE_TEMP_DIC = WIN_FILE_TEMP_DIC;
+            HOST_NAME = "localhost";
+        } else {
+            FILE_UPLOAD_DIC = LINUX_FILE_UPLOAD_DIC;
+            FILE_TEMP_DIC = LINUX_FILE_TEMP_DIC;
+            HOST_NAME = "http://wangdonghao.top";
+        }
+    }
 
     public final static String BACK_DOOR_KEY = "54188wang";
 

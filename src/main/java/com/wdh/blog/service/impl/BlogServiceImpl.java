@@ -26,8 +26,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.wdh.blog.config.Constants.FILE_UPLOAD_DIC;
-import static com.wdh.blog.config.Constants.FILE_UPLOAD_TEMP_DIC;
+import static com.wdh.blog.config.Constants.*;
 
 @Service
 @Slf4j
@@ -155,18 +154,18 @@ public class BlogServiceImpl implements BlogService {
         blogForUpdate.setBlogTags(blog.getBlogTags());
         //将图片移动到非临时文件夹
         String content = blogForUpdate.getBlogContent();
-        String[] s = content.split("http://wangdonghao.top");
+        String[] s = content.split(HOST_NAME);
         for (int i = 1; i < s.length; i++) {
-            int start = s[i].indexOf(FILE_UPLOAD_TEMP_DIC) + 13;
+            int start = s[i].indexOf(LINUX_FILE_TEMP_DIC) + 10;
             String fileName = s[i].substring(start, start + 21);
             try {
-                Files.move(Paths.get(FILE_UPLOAD_TEMP_DIC + fileName), Paths.get(FILE_UPLOAD_DIC + fileName), StandardCopyOption.REPLACE_EXISTING);
+                Files.move(Paths.get(FILE_TEMP_DIC + fileName), Paths.get(FILE_UPLOAD_DIC + fileName), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 log.error("Files move error", e.getMessage(), e);
             }
         }
         //替换图片到新路径
-        blogForUpdate.setBlogContent(content.replaceAll(FILE_UPLOAD_TEMP_DIC, FILE_UPLOAD_DIC));
+        blogForUpdate.setBlogContent(content.replaceAll(LINUX_FILE_TEMP_DIC, LINUX_FILE_UPLOAD_DIC));
         //新增的tag对象
         List<BlogTag> tagListForInsert = new ArrayList<>();
         //所有的tag对象，用于建立关系数据
