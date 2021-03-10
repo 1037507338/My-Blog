@@ -3,20 +3,21 @@
 <body>
 <footer class="container">
     <div class="site-footer">
-        <div class="copyright pull-left">
-            <!-- 请不要更改这一行 方便其他人知道模板的来源 谢谢 -->
-            <!-- Please keep this line to let others know where this theme comes from. Thank you :D -->
-            <span class="ft-warn">&heartsuit;</span>&nbsp;Theme
-            <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
-            &nbsp;•&nbsp;&copy;&nbsp;<a th:text="${configurations.get('footerAbout')}">your singal blog.</a> &nbsp;•&nbsp;
+<!--        <div>-->
+<!--            &lt;!&ndash; 请不要更改这一行 方便其他人知道模板的来源 谢谢 &ndash;&gt;-->
+<!--            &lt;!&ndash; Please keep this line to let others know where this theme comes from. Thank you :D &ndash;&gt;-->
+<!--            <span class="ft-warn">&heartsuit;</span>&nbsp;Theme-->
+<!--            <a href="https://github.com/1037507338">Yummy Jekyll</a>-->
+<!--            &nbsp;•&nbsp;&copy;&nbsp;<a th:text="${configurations.get('footerAbout')}">your singal blog.</a> &nbsp;•&nbsp;-->
+<!--        </div>-->
+        <a style="float: right;font-size:22pt" href="javascript:window.scrollTo(0,0)">TOP</a>
+        <div style="width:200px;margin:0 auto;">
+            ICP <a href="http://www.beian.miit.gov.cn" th:text="${configurations.get('footerICP')}">浙ICP备 xxxxxx-x号</a>&nbsp;•&nbsp;
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502044181"><img th:src="@{/blog/default/img/record.png}" style="float: left"/><p>京公网安备 11010502044181号</p></a>
         </div>
         <a href="https://github.com/1037507338" target="_blank" aria-label="view source code">
             <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
         </a>
-        <div class="pull-right">
-            ICP <a href="http://www.beian.miit.gov.cn" th:text="${configurations.get('footerICP')}">浙ICP备 xxxxxx-x号</a>&nbsp;•&nbsp;
-            <a href="javascript:window.scrollTo(0,0)">TOP</a>
-        </div>
     </div>
     <!-- Third-Party JS -->
     <script type="text/javascript" th:src="@{/blog/yummy-jekyll/plugins/geopattern/js/geopattern.min.js}"></script>
