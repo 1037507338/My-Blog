@@ -48,6 +48,9 @@ public class ConfigServiceImpl implements ConfigService {
             if ("websiteIcon".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
                 config.setValue(websiteIcon);
             }
+            if ("websiteSlogan".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
+                config.setValue(websiteSlogan);
+            }
             if ("yourAvatar".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
                 config.setValue(yourAvatar);
             }

@@ -40,6 +40,7 @@ public class Constants {
     public static final String websiteDescription = "personal blog是SpringBoot2+Thymeleaf+Mybatis建造的个人博客网站.SpringBoot实战博客源码.个人博客搭建";
     public static final String websiteLogo = "/admin/dist/img/logo.png";
     public static final String websiteIcon = "/admin/dist/img/logo.png";
+    public static final String websiteSlogan = "6666666666666666666";
 
     public static final String yourAvatar = "/admin/dist/img/wdh.png";
     public static final String yourEmail = "2449207463@qq.com";
