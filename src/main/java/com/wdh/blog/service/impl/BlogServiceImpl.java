@@ -50,7 +50,7 @@ public class BlogServiceImpl implements BlogService {
         if (blogForCreate == null) {
             return "constructBlogContent fail";
         }
-        BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
+        BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blogForCreate.getBlogCategoryId());
         blogForCreate.setBlogCategoryName(blogCategory.getCategoryName());
         if (blogMapper.insertSelective(blogForCreate) > 0) {
             Integer tagAndTypeResult = constructBlogTagAndType(blogForCreate, blogCategory);
@@ -72,12 +72,13 @@ public class BlogServiceImpl implements BlogService {
         blogForUpdate.setBlogCoverImage(blog.getBlogCoverImage());
         blogForUpdate.setBlogStatus(blog.getBlogStatus());
         blogForUpdate.setEnableComment(blog.getEnableComment());
+        blogForUpdate.setBlogCategoryId(blog.getBlogCategoryId());
         blogForUpdate = constructBlogContent(blogForUpdate);
         if (blogForUpdate == null) {
             return "constructBlogContent fail";
         }
-        BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
-        Integer tagAndTypeResult = constructBlogTagAndType(blog, blogCategory);
+        BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blogForUpdate.getBlogCategoryId());
+        Integer tagAndTypeResult = constructBlogTagAndType(blogForUpdate, blogCategory);
         if (tagAndTypeResult == 0) {
             return "constructBlogTagAndType fail";
         }
